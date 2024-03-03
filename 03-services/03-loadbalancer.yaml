@@ -20,7 +20,7 @@ metadata:
   name: nginx-nodes
 spec:
   type: NodePort
-  selectors:
+  selector:
     app: nginx-nodesport
     demo: service
   ports:
