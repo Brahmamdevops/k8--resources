@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-pod-cluster
+  name: nginx-pod-lb
   labels:
-    app: nginx
+    app: nginx-lb
     demo: service
 spec:
   containers:
@@ -12,19 +12,18 @@ spec:
     ports:
     - containerPort: 80
 
----
+----
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-nodes
 spec:
-  selector:
-    app: nginx
+  type: NodePort
+  selectors:
+    app: nginx-nodesport
     demo: service
-    
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
- 
+    - port: 80
+      targetPort: 80
+      nodePort: 9376
